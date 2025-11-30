@@ -1,0 +1,1 @@
+export { TabBgView } from './TabBgView';

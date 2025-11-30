@@ -1,0 +1,147 @@
+import { myFonts } from 'app/constants/myFonts';
+import { StyleSheet, Dimensions, Platform } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
+export const styles = StyleSheet.create({
+  tabContainer: {
+    paddingVertical: 10,
+  },
+  icon: {
+    width: 20,
+    height: 20,
+    marginRight: 10,
+  },
+  container: {
+    width: '100%',
+    height: 260,
+  },
+  poster: {
+    width: '100%',
+    height: 560,
+    justifyContent: 'space-between',
+  },
+  title: {
+    fontSize: 32,
+    fontFamily: myFonts.boldOpenSans,
+    color: '#F2F2F2',
+    textAlign: 'center',
+  },
+  gener: {
+    fontSize: 13,
+    fontFamily: myFonts.regularSFProDisplay,
+    color: '#F2F2F2',
+    textAlign: 'center',
+    marginVertical: 5,
+  },
+  infoTitle: {
+    fontSize: 12,
+    fontFamily: myFonts.mediumSFProDisplay,
+    color: '#9E9E9E',
+    textAlign: 'center',
+  },
+  infoText: {
+    fontSize: 12,
+    fontFamily: myFonts.mediumSFProDisplay,
+    color: '#FFF',
+    textAlign: 'center',
+  },
+  plotText: {
+    fontSize: 12,
+    fontFamily: myFonts.regularSFProDisplay,
+    color: '#FFF',
+    textAlign: 'center',
+    marginHorizontal: 40,
+    lineHeight: 13,
+    marginTop: 5,
+  },
+  topShadow: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 200,
+  },
+  bottomShadow: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 200,
+  },
+  mainView: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  infoView: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    marginVertical: 5,
+  },
+  btnView: {
+    flexDirection: 'row',
+    gap: 20,
+    marginTop: 20,
+  },
+  bg: {
+    width: '100%',
+    height: '130%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: 23,    paddingTop: 111, 
+  },
+  scroll: {
+    flexGrow: 1,
+    marginBottom: Platform.OS === 'android' ? 20 : 80,
+  },
+  seasonView: {
+    borderRadius: 30,
+    backgroundColor: '#1E1F2073',
+    height: 34,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    marginHorizontal: 5,
+    borderWidth: 1,
+    borderColor: '#DCECEC',
+  },
+  seasonViewActive: {
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: 'transparent',
+    backgroundColor: '#2ABEC0',
+    height: 34,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    marginHorizontal: 5,
+  },
+  seasonText: {
+    fontSize: 12,
+    fontFamily: myFonts.mediumSFProDisplay,
+    color: '#F2F2F2',
+    shadowColor: '#FFFFFF',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.25,
+    shadowRadius: 1.94,
+    elevation: 2,
+  },
+  seasonTextActive: {
+    fontSize: 12,
+    fontFamily: myFonts.mediumSFProDisplay,
+    color: '#F2F2F2',
+    shadowColor: '#FFFFFF',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.25,
+    shadowRadius: 1.94,
+    elevation: 2,
+  },
+  episodeView: {
+    marginRight: 10,
+  },
+  episodePicture: {
+    width: 150,
+    height: 120,
+    resizeMode: 'contain',
+  },
+});
