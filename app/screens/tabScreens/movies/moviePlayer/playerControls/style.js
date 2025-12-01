@@ -16,5 +16,6 @@ export const styles = StyleSheet.create({
     width: 38,
     height: 38,
     resizeMode: 'contain',
+    tintColor:'#f2f2f2'
   },
 });

@@ -27,7 +27,8 @@ import Toast from 'react-native-toast-message';
 export function MoviePlayer({ navigation, route }) {
   const userInfo = useSelector(store => store.userInfo.mainData);
   const streamType = route.params.data.stream_type;
-  const [data, setData] = useState(route.params.data);
+  const [data, setData] = useState(route.params?.data);
+  const [activeIndex, setActiveIndex] = useState(route.params?.activeIndex);
   const isLandscape = width > height;
   const { width, height } = useWindowDimensions();
   const videoRef = useRef(null);
@@ -46,7 +47,8 @@ export function MoviePlayer({ navigation, route }) {
   const [url, setUrl] = useState(``);
   const [egpData, setEgpData] = useState([]);
   const [activeData, setActiveData] = useState(route.params?.activeData);
-  const [liveTvDration, setLiveTvDuration] = useState('');
+  const [videoKey, setVideoKey] = useState(Date.now());
+
   useEffect(() => {
     updateUrl();
     getEGP();
@@ -199,10 +201,30 @@ export function MoviePlayer({ navigation, route }) {
     egpModalVisible,
   ]);
 
+  const onNext = useCallback(() => {
+    setVideoKey(Date.now());
+    setActiveIndex(prev => {
+      const nextIndex = prev + 1 < route.params.channels.length ? prev + 1 : 0;
+      setData(route.params.channels[nextIndex]);
+      return nextIndex;
+    });
+  }, []);
+
+  const onPrev = useCallback(() => {
+    setVideoKey(Date.now());
+    setActiveIndex(prev => {
+      const nextIndex =
+        prev - 1 >= 0 ? prev - 1 : route.params.channels.length - 1;
+      setData(route.params.channels[nextIndex]);
+      return nextIndex;
+    });
+  }, []);
+
   return (
     <View style={styles.container}>
       <StatusBar hidden={isLandscape} backgroundColor={'#000'} />
       <Video
+        key={videoKey}
         style={styles.video}
         source={{
           uri: url,
@@ -256,17 +278,18 @@ export function MoviePlayer({ navigation, route }) {
       {showControl && duration > 0 && (
         <View style={[styles.controlOverlay]} pointerEvents="auto">
           <View style={styles.fullscreenView}>
-            {streamType !== 'live' && (
-              <PlayerControls
-                onPlay={handlePlayPause}
-                onPause={handlePlayPause}
-                playing={play}
-                skipBackwards={skipBackward}
-                skipForwards={skipForward}
-                fullscreen={fullscreen}
-                isSeries={route.params?.info?.seasons?.length > 0}
-              />
-            )}
+            <PlayerControls
+              onPlay={handlePlayPause}
+              onPause={handlePlayPause}
+              playing={play}
+              skipBackwards={skipBackward}
+              skipForwards={skipForward}
+              fullscreen={fullscreen}
+              isSeries={route.params?.info?.seasons?.length > 0}
+              isTv={streamType === 'live'}
+              onNext={onNext}
+              onPrev={onPrev}
+            />
           </View>
 
           <ProgressBar

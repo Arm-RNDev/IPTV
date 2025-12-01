@@ -56,17 +56,18 @@ export function LiveTvMain({ navigation }) {
     getData();
   }, [getData]);
 
-  const getFilteredContent = (allContent, activeId) =>
+  const getFilteredContent = (allContent, activeId,) =>
     allContent?.[activeId] || [];
 
-  const getStreamInfo = async (item, chData) => {
+  const getStreamInfo = async (item, chData,index) => {
     try {
-      const res = await axiosInstance.get(
+       console.log(index);
+       const res = await axiosInstance.get(
         `player_api.php?username=${userInfo?.user_info?.username}&password=${userInfo?.user_info?.password}&action=get_live_streams&action=get_stream_info&stream_id=${item.stream_id}`,
       );
       const result = errorResp(res.data);
       if (!result.success) return;
-      navigation.navigate('MoviePlayer', { data: item, channels: chData });
+      navigation.navigate('MoviePlayer', { data: item, channels: chData,activeIndex:index });
     } catch (error) {
       Toast.show({
         type: 'error',

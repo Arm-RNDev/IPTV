@@ -17,11 +17,11 @@ export function ChannelList({ data, onPress, activeId }) {
       data={data}
       showsVerticalScrollIndicator={false}
       keyExtractor={item => item.stream_id.toString()}
-      renderItem={({ item }) => (
+      renderItem={({ item ,index}) => (
         <LiveStreamItem
           picture={item?.stream_icon}
           title={item?.name}
-          onPress={() => onPress(item, data)}
+          onPress={() => onPress(item, data,index)}
           egp={item.epg_channel_id}
         />
       )}
